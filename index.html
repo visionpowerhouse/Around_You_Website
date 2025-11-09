@@ -19,7 +19,8 @@
   <meta property="twitter:description" content="Share and see what's happening within 10 km around you — food spots, offers, events, alerts, lost-and-found, rentals, memories, and local moments.">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="aroundyou-final-blue-black-gradient-1.svg">
+  <link rel="apple-touch-icon" href="aroundyou-final-blue-black-gradient-1.svg">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,7 +55,7 @@
   <nav class="nav" aria-label="Primary">
     <div class="container navwrap">
       <a class="brand" href="#top" aria-label="Around You Home">
-        <div class="logo" aria-hidden="true"></div>
+        <img src="aroundyou-final-blue-black-gradient-1.svg" alt="Around You Logo" class="logo-img" aria-hidden="true">
         <h1>AROUND YOU</h1>
       </a>
       <button class="btn ghost menu" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
@@ -62,8 +63,7 @@
         <a href="#problem">Problem</a>
         <a href="#what">What it does</a>
         <a href="#influence">Creators</a>
-        <a href="#travel">Travel Mode</a>
-        <a href="#food">Food & Discovery</a>
+        <a href="#travel">Travel & Food</a>
         <a href="#founder">Founder</a>
         <a href="#cta">Join</a>
       </div>
@@ -125,17 +125,57 @@
   </header>
 
   <!-- PROBLEM -->
-  <section id="problem">
+  <section id="problem" class="problem-section">
     <div class="container">
-      <span class="badge">The Problem</span>
-      <div class="grid cols-2" style="margin-top:18px">
-        <div class="card">
-          <p class="lead"><b>Ever had that moment:</b><br>“Macha, when did this place open? I stay right here only — nobody told me!”</p>
-          <p class="lead">Or a biryani place goes viral months later and you’re like: “For God’s sake, how am I the last to know?”</p>
+      <div class="section-header" style="text-align:left; margin-bottom:32px">
+        <span class="badge">The Problem</span>
+      </div>
+      <div class="problem-content">
+        <!-- Video Side -->
+        <div class="problem-video-wrapper">
+          <div class="problem-video-container">
+            <!-- Video Poster/Preview -->
+            <div class="problem-video-poster" id="problemVideoPoster">
+              <div class="problem-poster-image"></div>
+              <div class="problem-poster-overlay"></div>
+            </div>
+            <video id="problemVideo" class="problem-video" controls preload="metadata" playsinline poster="">
+              <source src="around-you-app-problem.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="problem-video-overlay">
+              <div class="problem-play-btn" id="problemVideoPlayBtn">
+                <div class="problem-play-icon">▶️</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <p class="lead">Cities move fast. But real-time local discovery doesn’t exist. Yet we still miss what’s happening right around us.</p>
-          <p class="lead"><b>That ends now.</b> Today, local discovery = luck.</p>
+        
+        <!-- Description Side -->
+        <div class="problem-description">
+          <div class="problem-text-card">
+            <h2 style="margin-top:0; margin-bottom:20px; font-size:clamp(1.8rem, 3vw, 2.4rem); color:var(--teal-300); line-height:1.2">
+              We've All Been There
+            </h2>
+            <div class="problem-text-content">
+              <p class="lead" style="font-size:1.1rem; line-height:1.7; margin-bottom:20px">
+                <b>Ever had that moment:</b><br>
+                "Macha, when did this place open? I stay right here only — nobody told me!"
+              </p>
+              <p class="lead" style="font-size:1.1rem; line-height:1.7; margin-bottom:20px">
+                Or a biryani place goes viral months later and you're like: 
+                <b>"For God's sake, how am I the last to know?"</b>
+              </p>
+              <div class="problem-divider"></div>
+              <p class="lead" style="font-size:1.1rem; line-height:1.7; margin-top:20px; margin-bottom:16px">
+                Cities move fast. But real-time local discovery doesn't exist. 
+                Yet we still miss what's happening right around us.
+              </p>
+              <p class="lead" style="font-size:1.25rem; line-height:1.7; font-weight:700; color:var(--teal-300)">
+                <b>That ends now.</b> Today, local discovery = luck.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -213,46 +253,126 @@
     </div>
   </section>
 
-  <!-- TRAVEL MODE -->
-  <section id="travel">
+  <!-- TRAVEL MODE & FOOD & DISCOVERY (Combined) -->
+  <section id="travel" class="travel-food-section">
     <div class="container">
-      <span class="badge">✅ Travel Mode</span>
-      <div class="grid cols-2" style="margin-top:18px">
-        <div class="card">
-          <h3>Jump city‑to‑city. Experience every 10 km.</h3>
-          <p class="muted">Search any Indian city and dive into its live feed. See where locals are eating, hanging out, partying, trending & discovering.</p>
-          <div class="split" style="margin-top:8px">
-            <span class="chip">Most‑blogged street food spots</span>
-            <span class="chip">Must‑visit cafes & pubs</span>
-            <span class="chip">Deals, offers & openings</span>
-            <span class="chip">Local memories</span>
-            <span class="chip">Area‑wise events</span>
-          </div>
-        </div>
-        <div class="card">
-          <h3>Instant local immersion — no flights needed.</h3>
-          <p class="muted">Hop to Goa, Jaipur, Bengaluru or Shillong and see what’s actually happening right now.</p>
-          <div class="split" style="margin-top:8px">
-            <span class="chip">10 km feed</span>
-            <span class="chip">20 km trends</span>
-            <span class="chip">Creator signals</span>
+      <div class="section-header">
+        <span class="badge">✅ Travel Mode & Food Discovery</span>
+        <p class="lead" style="margin-top:12px; font-size:1.1rem;">Explore cities, discover food, and experience local culture — all in one place</p>
+      </div>
+      
+      <!-- Video Showcase -->
+      <div class="video-showcase">
+        <div class="video-wrapper">
+          <div class="video-container-main">
+            <!-- Preview Image/Poster -->
+            <div class="video-poster" id="videoPoster">
+              <div class="poster-image"></div>
+              <div class="poster-overlay"></div>
+            </div>
+            <video id="travelVideo" class="travel-video" controls preload="metadata" playsinline poster="">
+              <source src="around-you-a-hyperlocal-experience.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay">
+              <div class="video-content">
+                <div class="video-description">
+                  <h3>Experience Around You</h3>
+                  <p>Watch how Around You connects you with what's happening in your 10 km radius — from food spots to events, alerts to memories. Discover hyperlocal experiences across India.</p>
+                </div>
+                <div class="video-play-btn" id="videoPlayBtn">
+                  <div class="play-icon">▶️</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- FOOD & DISCOVERY -->
-  <section id="food">
-    <div class="container">
-      <span class="badge">✅ Food & Discovery</span>
-      <div class="grid cols-3" style="margin-top:18px">
-        <div class="card feature"><div class="icon">🍽️</div><div><h3>Restaurants</h3><p class="muted">What’s new, hot, or hidden — right now.</p></div></div>
-        <div class="card feature"><div class="icon">🌶️</div><div><h3>Street food</h3><p class="muted">Taste‑trails powered by locals.</p></div></div>
-        <div class="card feature"><div class="icon">☕</div><div><h3>Cafes</h3><p class="muted">Work, date, or vibe spots trending today.</p></div></div>
-        <div class="card feature"><div class="icon">🍻</div><div><h3>Pubs</h3><p class="muted">Where the city’s night is alive.</p></div></div>
-        <div class="card feature"><div class="icon">🔎</div><div><h3>Hidden gems</h3><p class="muted">The places only locals know — now you do too.</p></div></div>
-        <div class="card feature"><div class="icon">🎥</div><div><h3>Powered by creators</h3><p class="muted">Real voices > faceless algorithms.</p></div></div>
+      <!-- Interactive Tabs -->
+      <div class="travel-food-tabs">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="travel">🧳 Travel Mode</button>
+          <button class="tab-btn" data-tab="food">🍜 Food & Discovery</button>
+        </div>
+
+        <!-- Travel Mode Content -->
+        <div class="tab-content active" id="travelTab">
+          <div class="grid cols-2" style="margin-top:24px; gap:20px">
+            <div class="card interactive-card">
+              <div class="card-icon">🌍</div>
+              <h3>Jump city‑to‑city. Experience every 10 km.</h3>
+              <p class="muted">Search any Indian city and dive into its live feed. See where locals are eating, hanging out, partying, trending & discovering.</p>
+              <div class="feature-tags">
+                <span class="tag">📍 Most‑blogged street food spots</span>
+                <span class="tag">☕ Must‑visit cafes & pubs</span>
+                <span class="tag">🎉 Deals, offers & openings</span>
+                <span class="tag">📸 Local memories</span>
+                <span class="tag">🎭 Area‑wise events</span>
+              </div>
+            </div>
+            <div class="card interactive-card">
+              <div class="card-icon">⚡</div>
+              <h3>Instant local immersion — no flights needed.</h3>
+              <p class="muted">Hop to Goa, Jaipur, Bengaluru or Shillong and see what's actually happening right now.</p>
+              <div class="feature-tags">
+                <span class="tag">📡 10 km feed</span>
+                <span class="tag">🔥 20 km trends</span>
+                <span class="tag">✨ Creator signals</span>
+                <span class="tag">🗺️ City exploration</span>
+                <span class="tag">🎯 Hyperlocal precision</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food & Discovery Content -->
+        <div class="tab-content" id="foodTab">
+          <div class="grid cols-3" style="margin-top:24px; gap:18px">
+            <div class="card feature interactive-card">
+              <div class="icon">🍽️</div>
+              <div>
+                <h3>Restaurants</h3>
+                <p class="muted">What's new, hot, or hidden — right now.</p>
+              </div>
+            </div>
+            <div class="card feature interactive-card">
+              <div class="icon">🌶️</div>
+              <div>
+                <h3>Street food</h3>
+                <p class="muted">Taste‑trails powered by locals.</p>
+              </div>
+            </div>
+            <div class="card feature interactive-card">
+              <div class="icon">☕</div>
+              <div>
+                <h3>Cafes</h3>
+                <p class="muted">Work, date, or vibe spots trending today.</p>
+              </div>
+            </div>
+            <div class="card feature interactive-card">
+              <div class="icon">🍻</div>
+              <div>
+                <h3>Pubs</h3>
+                <p class="muted">Where the city's night is alive.</p>
+              </div>
+            </div>
+            <div class="card feature interactive-card">
+              <div class="icon">🔎</div>
+              <div>
+                <h3>Hidden gems</h3>
+                <p class="muted">The places only locals know — now you do too.</p>
+              </div>
+            </div>
+            <div class="card feature interactive-card">
+              <div class="icon">🎥</div>
+              <div>
+                <h3>Powered by creators</h3>
+                <p class="muted">Real voices > faceless algorithms.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -368,10 +488,10 @@
         </div>
       </div>
       
-      <div class="cta" style="justify-content:center; margin-top:24px">
+      <!-- <div class="cta" style="justify-content:center; margin-top:24px">
         <button class="btn" onclick="document.getElementById('waitlistForm').scrollIntoView({behavior:'smooth'})">✨ Creator / Blogger Access</button>
         <button class="btn" onclick="document.getElementById('waitlistForm').scrollIntoView({behavior:'smooth'})">🏪 Business Sign‑Up</button>
-      </div>
+      </div> -->
       
       <!-- Social Share -->
       <div class="social-share" style="margin-top:32px">
@@ -410,7 +530,7 @@
     <div class="container split" style="justify-content:space-between">
       <div>
         <div class="brand" style="margin-bottom:6px">
-          <div class="logo" aria-hidden="true"></div>
+          <img src="aroundyou-final-blue-black-gradient-1.svg" alt="Around You Logo" class="logo-img" aria-hidden="true">
           <b>AROUND YOU</b>
         </div>
         <small>© <span id="year"></span> Around You. Made in India.</small>

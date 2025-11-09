@@ -186,7 +186,7 @@ document.querySelectorAll('section .card, section h2, .feature').forEach(el=>io.
   toggleButton();
 })();
 
-// Lazy Load Video
+// Lazy Load Video (Hero section)
 (function(){
   const videoPlaceholder = document.getElementById('videoPlaceholder');
   const videoIframe = document.getElementById('videoIframe');
@@ -200,6 +200,291 @@ document.querySelectorAll('section .card, section h2, .feature').forEach(el=>io.
       videoPlaceholder.style.display = 'none';
       videoIframe.style.display = 'block';
     }
+  });
+})();
+
+// Travel & Food Section - Interactive Tabs
+(function(){
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  if(tabButtons.length === 0) return;
+  
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', function(){
+      const targetTab = this.getAttribute('data-tab');
+      
+      // Remove active class from all buttons and contents
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+      
+      // Add active class to clicked button and corresponding content
+      this.classList.add('active');
+      const targetContent = document.getElementById(targetTab + 'Tab');
+      if(targetContent){
+        targetContent.classList.add('active');
+      }
+    });
+  });
+})();
+
+// Travel & Food Section - Video Playback
+(function(){
+  const travelVideo = document.getElementById('travelVideo');
+  if(!travelVideo) return;
+  
+  const videoContainer = travelVideo.closest('.video-container-main');
+  if(!videoContainer) return;
+  
+  const videoPoster = videoContainer.querySelector('.video-poster');
+  const videoOverlay = videoContainer.querySelector('.video-overlay');
+  const videoPlayBtn = document.getElementById('videoPlayBtn');
+  
+  if(!videoOverlay || !videoPlayBtn) return;
+  
+  // Play video when overlay or play button is clicked
+  function playVideo(){
+    // Hide poster and overlay first
+    if(videoPoster) videoPoster.style.display = 'none';
+    videoOverlay.style.display = 'none';
+    
+    // Remove loading-frame class if present and reset any inline styles that might hide it
+    travelVideo.classList.remove('loading-frame');
+    travelVideo.style.display = 'block';
+    travelVideo.style.visibility = 'visible';
+    travelVideo.style.opacity = '1';
+    travelVideo.style.position = 'absolute';
+    travelVideo.style.top = '0';
+    travelVideo.style.left = '0';
+    travelVideo.style.width = '100%';
+    travelVideo.style.height = '100%';
+    travelVideo.style.zIndex = '10';
+    travelVideo.classList.add('playing');
+    
+    travelVideo.muted = false;
+    
+    // Small delay to ensure DOM updates
+    requestAnimationFrame(function(){
+      travelVideo.play().catch(function(error) {
+        console.error('Error playing video:', error);
+        // Fallback: show overlay and poster again if video fails to play
+        travelVideo.classList.remove('playing');
+        travelVideo.style.display = 'none';
+        if(videoPoster) videoPoster.style.display = 'block';
+        videoOverlay.style.display = 'flex';
+      });
+    });
+  }
+  
+  videoOverlay.addEventListener('click', playVideo);
+  videoPlayBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    playVideo();
+  });
+  
+  // Show overlay and poster again when video ends
+  travelVideo.addEventListener('ended', function(){
+    travelVideo.classList.remove('playing');
+    travelVideo.style.display = 'none';
+    travelVideo.currentTime = 0;
+    travelVideo.muted = true;
+    if(videoPoster) {
+      videoPoster.style.display = 'block';
+      videoPoster.classList.remove('hidden');
+    }
+    videoOverlay.style.display = 'flex';
+    videoOverlay.classList.remove('hidden');
+  });
+  
+  // Capture first frame and set as poster image
+  const posterImage = videoContainer.querySelector('.poster-image');
+  
+  // Function to capture video frame
+  function captureVideoFrame(){
+    if(posterImage && !posterImage.dataset.frameCaptured && !travelVideo.classList.contains('playing')){
+      try {
+        // Create a hidden video element for frame capture (don't modify the main video)
+        const hiddenVideo = travelVideo.cloneNode(true);
+        hiddenVideo.style.position = 'fixed';
+        hiddenVideo.style.left = '-9999px';
+        hiddenVideo.style.top = '0';
+        hiddenVideo.style.width = '1px';
+        hiddenVideo.style.height = '1px';
+        hiddenVideo.style.opacity = '0';
+        hiddenVideo.style.pointerEvents = 'none';
+        hiddenVideo.style.zIndex = '-1';
+        hiddenVideo.muted = true;
+        hiddenVideo.controls = false;
+        document.body.appendChild(hiddenVideo);
+        
+        hiddenVideo.addEventListener('loadeddata', function(){
+          hiddenVideo.currentTime = 0.5;
+        });
+        
+        hiddenVideo.addEventListener('seeked', function(){
+          if(hiddenVideo.videoWidth > 0 && hiddenVideo.videoHeight > 0){
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width = hiddenVideo.videoWidth;
+              canvas.height = hiddenVideo.videoHeight;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(hiddenVideo, 0, 0, canvas.width, canvas.height);
+              
+              const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+              if(dataUrl && dataUrl !== 'data:,') {
+                posterImage.style.backgroundImage = `url(${dataUrl}), linear-gradient(135deg, rgba(20,184,166,0.25), rgba(20,184,166,0.1))`;
+                posterImage.style.backgroundSize = 'cover, cover';
+                posterImage.style.backgroundPosition = 'center, center';
+                posterImage.dataset.frameCaptured = 'true';
+              }
+            } catch(e) {
+              console.log('Could not capture frame:', e);
+            }
+            // Clean up hidden video
+            document.body.removeChild(hiddenVideo);
+          }
+        });
+        
+        // Load the hidden video
+        hiddenVideo.load();
+      } catch(e) {
+        console.log('Could not create hidden video for frame capture:', e);
+      }
+    }
+  }
+  
+  // Capture frame after video metadata loads (using hidden clone)
+  travelVideo.addEventListener('loadedmetadata', function(){
+    captureVideoFrame();
+  });
+})();
+
+// Problem Section - Video Playback
+(function(){
+  const problemVideo = document.getElementById('problemVideo');
+  if(!problemVideo) return;
+  
+  const videoContainer = problemVideo.closest('.problem-video-container');
+  if(!videoContainer) return;
+  
+  const videoPoster = videoContainer.querySelector('.problem-video-poster');
+  const posterImage = videoContainer.querySelector('.problem-poster-image');
+  const videoOverlay = videoContainer.querySelector('.problem-video-overlay');
+  const videoPlayBtn = document.getElementById('problemVideoPlayBtn');
+  
+  if(!videoOverlay || !videoPlayBtn) return;
+  
+  // Capture first frame and set as poster image
+  function captureProblemVideoFrame(){
+    if(posterImage && !posterImage.dataset.frameCaptured && !problemVideo.classList.contains('playing')){
+      try {
+        // Create a hidden video element for frame capture (don't modify the main video)
+        const hiddenVideo = problemVideo.cloneNode(true);
+        hiddenVideo.style.position = 'fixed';
+        hiddenVideo.style.left = '-9999px';
+        hiddenVideo.style.top = '0';
+        hiddenVideo.style.width = '1px';
+        hiddenVideo.style.height = '1px';
+        hiddenVideo.style.opacity = '0';
+        hiddenVideo.style.pointerEvents = 'none';
+        hiddenVideo.style.zIndex = '-1';
+        hiddenVideo.muted = true;
+        hiddenVideo.controls = false;
+        document.body.appendChild(hiddenVideo);
+        
+        hiddenVideo.addEventListener('loadeddata', function(){
+          hiddenVideo.currentTime = 0.5;
+        });
+        
+        hiddenVideo.addEventListener('seeked', function(){
+          if(hiddenVideo.videoWidth > 0 && hiddenVideo.videoHeight > 0){
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width = hiddenVideo.videoWidth;
+              canvas.height = hiddenVideo.videoHeight;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(hiddenVideo, 0, 0, canvas.width, canvas.height);
+              
+              const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+              if(dataUrl && dataUrl !== 'data:,') {
+                posterImage.style.backgroundImage = `url(${dataUrl}), linear-gradient(135deg, rgba(20,184,166,0.2), rgba(20,184,166,0.1))`;
+                posterImage.style.backgroundSize = 'cover, cover';
+                posterImage.style.backgroundPosition = 'center, center';
+                posterImage.dataset.frameCaptured = 'true';
+              }
+            } catch(e) {
+              console.log('Could not capture frame:', e);
+            }
+            // Clean up hidden video
+            document.body.removeChild(hiddenVideo);
+          }
+        });
+        
+        // Load the hidden video
+        hiddenVideo.load();
+      } catch(e) {
+        console.log('Could not create hidden video for frame capture:', e);
+      }
+    }
+  }
+  
+  // Capture frame after video metadata loads (using hidden clone)
+  problemVideo.addEventListener('loadedmetadata', function(){
+    captureProblemVideoFrame();
+  });
+  
+  // Play video when overlay or play button is clicked
+  function playProblemVideo(){
+    // Hide poster and overlay first
+    if(videoPoster) videoPoster.style.display = 'none';
+    videoOverlay.style.display = 'none';
+    
+    // Remove loading-frame class if present and reset any inline styles that might hide it
+    problemVideo.classList.remove('loading-frame');
+    problemVideo.style.display = 'block';
+    problemVideo.style.visibility = 'visible';
+    problemVideo.style.opacity = '1';
+    problemVideo.style.position = 'absolute';
+    problemVideo.style.top = '0';
+    problemVideo.style.left = '0';
+    problemVideo.style.width = '100%';
+    problemVideo.style.height = '100%';
+    problemVideo.style.zIndex = '10';
+    problemVideo.classList.add('playing');
+    
+    problemVideo.muted = false;
+    
+    // Small delay to ensure DOM updates
+    requestAnimationFrame(function(){
+      problemVideo.play().catch(function(error) {
+        console.error('Error playing problem video:', error);
+        // Fallback: show overlay and poster again if video fails to play
+        problemVideo.classList.remove('playing');
+        problemVideo.style.display = 'none';
+        if(videoPoster) videoPoster.style.display = 'block';
+        videoOverlay.style.display = 'flex';
+      });
+    });
+  }
+  
+  videoOverlay.addEventListener('click', playProblemVideo);
+  videoPlayBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    playProblemVideo();
+  });
+  
+  // Show overlay and poster again when video ends
+  problemVideo.addEventListener('ended', function(){
+    problemVideo.classList.remove('playing');
+    problemVideo.style.display = 'none';
+    problemVideo.currentTime = 0;
+    problemVideo.muted = true;
+    if(videoPoster) {
+      videoPoster.style.display = 'block';
+      videoPoster.classList.remove('hidden');
+    }
+    videoOverlay.style.display = 'flex';
+    videoOverlay.classList.remove('hidden');
   });
 })();
 
