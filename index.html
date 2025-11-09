@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Around You — Your 10 km, live. Anywhere in India.</title>
+  <meta name="description" content="Share and see what's happening within 10 km around you — food spots, offers, events, alerts, lost-and-found, rentals, memories, and local moments. For creators & businesses: reach up to 20 km anywhere in India with hyperlocal precision."/>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://visionpowerhouse.github.io/Around_You/">
+  <meta property="og:title" content="Around You — Your 10 km, live. Anywhere in India.">
+  <meta property="og:description" content="Share and see what's happening within 10 km around you — food spots, offers, events, alerts, lost-and-found, rentals, memories, and local moments.">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://visionpowerhouse.github.io/Around_You/">
+  <meta property="twitter:title" content="Around You — Your 10 km, live. Anywhere in India.">
+  <meta property="twitter:description" content="Share and see what's happening within 10 km around you — food spots, offers, events, alerts, lost-and-found, rentals, memories, and local moments.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Around You",
+    "description": "Share and see what's happening within 10 km around you — food spots, offers, events, alerts, lost-and-found, rentals, memories, and local moments.",
+    "applicationCategory": "SocialNetworkingApplication",
+    "operatingSystem": "iOS, Android",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#top" class="skip-link">Skip to main content</a>
+  
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+  
+  <!-- NAV -->
+  <nav class="nav" aria-label="Primary">
+    <div class="container navwrap">
+      <a class="brand" href="#top" aria-label="Around You Home">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>AROUND YOU</h1>
+      </a>
+      <button class="btn ghost menu" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+      <div class="navlinks" id="navlinks">
+        <a href="#problem">Problem</a>
+        <a href="#what">What it does</a>
+        <a href="#influence">Creators</a>
+        <a href="#travel">Travel Mode</a>
+        <a href="#food">Food & Discovery</a>
+        <a href="#founder">Founder</a>
+        <a href="#cta">Join</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="container heroInner">
+      <div>
+        <span class="badge">Your 10 km, live — India</span>
+        <h2 class="headline" style="margin:.6rem 0 1rem">Your 10 km, live. Anywhere in India.</h2>
+        <p class="sub">Share and see what's happening within 10 km around you — food spots, offers, events, alerts, lost-and-found, rentals, memories, and local moments.</p>
+        <div class="cta">
+          <a class="btn teal" href="#cta">🚀 Join Waitlist</a>
+          <a class="btn" href="#preview" id="watchPreviewBtn">▶️ Watch Preview</a>
+        </div>
+        <div class="bar"></div>
+        <div class="split">
+          <span class="chip">Creators & Bloggers</span>
+          <span class="chip">Organizations & Businesses</span>
+          <span class="chip">Hyperlocal up to 20 km</span>
+        </div>
+      </div>
+
+      <div class="phone" aria-label="App preview" id="phoneFrame">
+        <div class="screen" id="videoScreen">
+          <!-- Video Container - Always visible and embedded -->
+          <div id="videoContainer" style="width:100%; height:62%; position:absolute; top:0; left:0; right:0; border-radius:26px 26px 0 0; overflow:hidden; z-index:10; background:var(--black)">
+            <div id="videoPlaceholder" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; cursor:pointer; background:linear-gradient(135deg, rgba(20,184,166,0.1), rgba(20,184,166,0.05));">
+              <div style="text-align:center; color:var(--teal-300);">
+                <div style="font-size:3rem; margin-bottom:8px;">▶️</div>
+                <div style="font-size:0.85rem; font-weight:600;">Click to play preview</div>
+              </div>
+            </div>
+            <iframe id="videoIframe" data-src="https://drive.google.com/file/d/1s8RgepREGMlQm60pZdRi5xFSZ8eXL0WF/preview" width="100%" height="100%" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="border:none; display:none"></iframe>
+          </div>
+          <!-- Top copy - Hidden when video is showing -->
+          <div style="padding:16px 16px 14px; display:none" id="phoneContent">
+            <div class="badge" style="border:none; background:transparent; padding:0">Live near you · 10 km</div>
+            <h3 style="margin:.6rem 0 .4rem">Bellandur · Whitefield · Koramangala</h3>
+            <p class="muted" style="margin:0">Food • Offers • Events • Alerts • Lost & Found • Rentals • Moments</p>
+          </div>
+          <!-- Ticker - Always visible below video -->
+          <div class="ticker" id="ticker" style="position:absolute; left:0; right:0; bottom:0; height:38%; top:62%; border-top:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg, rgba(20,184,166,.05), rgba(20,184,166,.02)); z-index:11; padding:0; overflow:hidden; scrollbar-width:none; -ms-overflow-style:none;">
+            <div class="ticker-content" id="tickerContent" style="display:flex; flex-direction:column; will-change:transform; min-height:100%;">
+              <div class="tick" style="padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-shrink:0; border-bottom:1px dashed rgba(255,255,255,.06); min-height:48px;"><div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;"><span class="dot"></span> <span><b>Offer:</b> 40% off on burgers · HSR Layout</span></div> <span class="pill">3 km</span></div>
+              <div class="tick" style="padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-shrink:0; border-bottom:1px dashed rgba(255,255,255,.06); min-height:48px;"><div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;"><span class="dot"></span> <span><b>Alert:</b> Rain traffic near Silk Board</span></div> <span class="pill">5 km</span></div>
+              <div class="tick" style="padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-shrink:0; border-bottom:1px dashed rgba(255,255,255,.06); min-height:48px;"><div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;"><span class="dot"></span> <span><b>Food:</b> Gulab jamun doughnuts trending</span></div> <span class="pill">7 km</span></div>
+              <div class="tick" style="padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-shrink:0; border-bottom:1px dashed rgba(255,255,255,.06); min-height:48px;"><div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;"><span class="dot"></span> <span><b>Event:</b> Stand-up open mic tonight</span></div> <span class="pill">2 km</span></div>
+              <div class="tick" style="padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-shrink:0; border-bottom:1px dashed rgba(255,255,255,.06); min-height:48px;"><div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;"><span class="dot"></span> <span><b>Lost & Found:</b> Keys near ORR</span></div> <span class="pill">4 km</span></div>
+              <div class="tick" style="padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-shrink:0; border-bottom:1px dashed rgba(255,255,255,.06); min-height:48px;"><div style="display:flex; align-items:center; gap:10px; flex:1; min-width:0;"><span class="dot"></span> <span><b>Rental:</b> PG opening · Marathahalli</span></div> <span class="pill">6 km</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="container">
+      <span class="badge">The Problem</span>
+      <div class="grid cols-2" style="margin-top:18px">
+        <div class="card">
+          <p class="lead"><b>Ever had that moment:</b><br>“Macha, when did this place open? I stay right here only — nobody told me!”</p>
+          <p class="lead">Or a biryani place goes viral months later and you’re like: “For God’s sake, how am I the last to know?”</p>
+        </div>
+        <div class="card">
+          <p class="lead">Cities move fast. But real-time local discovery doesn’t exist. Yet we still miss what’s happening right around us.</p>
+          <p class="lead"><b>That ends now.</b> Today, local discovery = luck.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IT DOES -->
+  <section id="what">
+    <div class="container">
+      <div class="split" style="justify-content:space-between; align-items:end">
+        <span class="badge">What Around You Does</span>
+        <div class="muted">Share and see live Hyperlocal Feed (10 km) &nbsp;·&nbsp; Upto 20 km reach for trends & offers</div>
+      </div>
+      <div class="grid cols-3" style="margin-top:18px">
+        <div class="card feature">
+          <div class="icon" aria-hidden="true">📡</div>
+          <div>
+            <h3>Live Hyperlocal Feed (10 km)</h3>
+            <p class="muted">Real moments, deals, alerts, events, rentals & more around you — in real time.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">🚨</div>
+          <div>
+            <h3>Emergencies & Alerts</h3>
+            <p class="muted">Get critical updates that actually matter within your 10 km.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">🧭</div>
+          <div>
+            <h3>Lost & Found</h3>
+            <p class="muted">Bring the city together when it matters. Find what’s lost, fast.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">🎟️</div>
+          <div>
+            <h3>Local Events</h3>
+            <p class="muted">Discover meetups, open mics, pop-ups, and area-wise happenings.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">🍜</div>
+          <div>
+            <h3>Trending Food (up to 20 km)</h3>
+            <p class="muted">Street food, cafes, pubs — find what’s buzzing beyond your block.</p>
+          </div>
+        </div>
+        <div class="card feature">
+          <div class="icon">🏷️</div>
+          <div>
+            <h3>Offers & Deals (up to 20 km)</h3>
+            <p class="muted">Never miss an opening, launch, or limited-time discount again.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFLUENCE -->
+  <section id="influence">
+    <div class="container">
+      <div class="split" style="justify-content:space-between; align-items:end">
+        <span class="badge">Build Local Influence (Up to 20 km)</span>
+        <div class="muted">Creators · Bloggers · Organizations</div>
+      </div>
+      <div class="grid cols-3" style="margin-top:18px">
+        <div class="card"><h3>Announce restaurant openings</h3><p class="muted">Turn neighbourhood buzz into lines at your door.</p></div>
+        <div class="card"><h3>Promote PG rentals</h3><p class="muted">Fill beds faster with relevant, nearby seekers.</p></div>
+        <div class="card"><h3>Share offers & sales</h3><p class="muted">Reach the people most likely to walk in today.</p></div>
+        <div class="card"><h3>Post content & updates</h3><p class="muted">Drop reels, stories & posts city-first — not algorithm-first.</p></div>
+        <div class="card"><h3>Build a city‑first audience</h3><p class="muted">Grow hyperlocal trust, not random followers.</p></div>
+        <div class="card"><h3>Post anywhere in India</h3><p class="muted">Reach up to 20 km around any spot — instantly.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAVEL MODE -->
+  <section id="travel">
+    <div class="container">
+      <span class="badge">✅ Travel Mode</span>
+      <div class="grid cols-2" style="margin-top:18px">
+        <div class="card">
+          <h3>Jump city‑to‑city. Experience every 10 km.</h3>
+          <p class="muted">Search any Indian city and dive into its live feed. See where locals are eating, hanging out, partying, trending & discovering.</p>
+          <div class="split" style="margin-top:8px">
+            <span class="chip">Most‑blogged street food spots</span>
+            <span class="chip">Must‑visit cafes & pubs</span>
+            <span class="chip">Deals, offers & openings</span>
+            <span class="chip">Local memories</span>
+            <span class="chip">Area‑wise events</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Instant local immersion — no flights needed.</h3>
+          <p class="muted">Hop to Goa, Jaipur, Bengaluru or Shillong and see what’s actually happening right now.</p>
+          <div class="split" style="margin-top:8px">
+            <span class="chip">10 km feed</span>
+            <span class="chip">20 km trends</span>
+            <span class="chip">Creator signals</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD & DISCOVERY -->
+  <section id="food">
+    <div class="container">
+      <span class="badge">✅ Food & Discovery</span>
+      <div class="grid cols-3" style="margin-top:18px">
+        <div class="card feature"><div class="icon">🍽️</div><div><h3>Restaurants</h3><p class="muted">What’s new, hot, or hidden — right now.</p></div></div>
+        <div class="card feature"><div class="icon">🌶️</div><div><h3>Street food</h3><p class="muted">Taste‑trails powered by locals.</p></div></div>
+        <div class="card feature"><div class="icon">☕</div><div><h3>Cafes</h3><p class="muted">Work, date, or vibe spots trending today.</p></div></div>
+        <div class="card feature"><div class="icon">🍻</div><div><h3>Pubs</h3><p class="muted">Where the city’s night is alive.</p></div></div>
+        <div class="card feature"><div class="icon">🔎</div><div><h3>Hidden gems</h3><p class="muted">The places only locals know — now you do too.</p></div></div>
+        <div class="card feature"><div class="icon">🎥</div><div><h3>Powered by creators</h3><p class="muted">Real voices > faceless algorithms.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABLE -->
+  <section id="compare">
+    <div class="container">
+      <span class="badge">Who it’s for</span>
+      <div class="card" style="margin-top:18px; overflow:hidden">
+        <table class="table" role="table" aria-label="Users vs Creators vs Businesses">
+          <thead>
+            <tr>
+              <th>Users</th>
+              <th>Creators & Bloggers</th>
+              <th>Organizations & Businesses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Share & see what’s happening near you</td>
+              <td>Build hyperlocal authority</td>
+              <td>Promote anywhere in India</td>
+            </tr>
+            <tr>
+              <td>Discover food, deals & events</td>
+              <td>Reach relevant people</td>
+              <td>Target within 20 km</td>
+            </tr>
+            <tr>
+              <td>Explore any city live</td>
+              <td>Drop content city‑wise</td>
+              <td>Share offers, openings, rentals</td>
+            </tr>
+            <tr>
+              <td>Never miss local moments</td>
+              <td>Grow city‑first followers</td>
+              <td>Real local audience, not noise</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section id="founder">
+    <div class="container founder">
+      <div class="card">
+        <span class="badge">👋 Founder Note</span>
+        <p class="quote">Cities move fast. Your information should too.</p>
+        <p class="lead">So we built a simple answer: <b>“What’s happening around me right now in my 10 km?”</b> And when you want to explore another city — jump there instantly and see its live feed.</p>
+        <p class="lead">This is India’s hyperlocal era. We’re building it together.</p>
+      </div>
+      <div class="card">
+        <h3>For creators, bloggers & organizations</h3>
+        <p class="muted">Reach audiences up to 20 km anywhere in India. Post updates, offers, openings, PG rentals, and more with hyperlocal precision.</p>
+        <div class="cta">
+          <a class="btn teal" href="#cta">✨ Creator / Blogger Access</a>
+          <a class="btn" href="#cta">🏪 Business Sign‑Up</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="container center">
+      <span class="badge">✅ Call to Action</span>
+      <h2 style="margin:.6rem 0 1rem">Made in India. For India. 🇮🇳</h2>
+      <p class="lead">Launching soon</p>
+      
+      <!-- Waitlist Form -->
+      <div class="waitlist-form-container" id="waitlistForm">
+        <form class="waitlist-form" id="joinForm" novalidate>
+          <div class="form-group">
+            <input type="text" id="userName" name="name" placeholder="Your name" required aria-label="Your name">
+            <span class="error-message" id="nameError"></span>
+          </div>
+          <div class="form-group">
+            <input type="email" id="userEmail" name="email" placeholder="Your email" required aria-label="Your email">
+            <span class="error-message" id="emailError"></span>
+          </div>
+          <div class="form-group">
+            <select id="userType" name="type" required aria-label="I am a">
+              <option value="">I am a...</option>
+              <option value="user">👤 User</option>
+              <option value="creator">✨ Creator / Blogger</option>
+              <option value="business">🏪 Business / Organization</option>
+            </select>
+            <span class="error-message" id="typeError"></span>
+          </div>
+          <div class="form-group">
+            <input type="text" id="userCity" name="city" placeholder="Your city (optional)" aria-label="Your city">
+          </div>
+          <button type="submit" class="btn teal full" id="submitBtn">
+            <span class="btn-text">🚀 Join Waitlist</span>
+            <span class="btn-loader" style="display:none;">⏳</span>
+          </button>
+        </form>
+        <div class="form-message success" id="successMessage" style="display:none;">
+          <div class="message-icon">✅</div>
+          <div>
+            <strong>Thank you!</strong>
+            <p>We've added you to the waitlist. We'll notify you when we launch.</p>
+          </div>
+        </div>
+        <div class="form-message error" id="errorMessage" style="display:none;">
+          <div class="message-icon">❌</div>
+          <div>
+            <strong>Oops!</strong>
+            <p id="errorText">Something went wrong. Please try again.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cta" style="justify-content:center; margin-top:24px">
+        <button class="btn" onclick="document.getElementById('waitlistForm').scrollIntoView({behavior:'smooth'})">✨ Creator / Blogger Access</button>
+        <button class="btn" onclick="document.getElementById('waitlistForm').scrollIntoView({behavior:'smooth'})">🏪 Business Sign‑Up</button>
+      </div>
+      
+      <!-- Social Share -->
+      <div class="social-share" style="margin-top:32px">
+        <span class="muted" style="margin-right:12px">Share:</span>
+        <button class="btn ghost share-btn" data-platform="twitter" aria-label="Share on Twitter">🐦 Twitter</button>
+        <button class="btn ghost share-btn" data-platform="facebook" aria-label="Share on Facebook">📘 Facebook</button>
+        <button class="btn ghost share-btn" data-platform="whatsapp" aria-label="Share on WhatsApp">💬 WhatsApp</button>
+        <button class="btn ghost share-btn" data-platform="copy" aria-label="Copy link">🔗 Copy Link</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREVIEW (placeholder anchor) -->
+  <section id="preview" aria-hidden="true" style="padding:0; height:1px"></section>
+
+  <!-- STICKY CTA BAR -->
+  <div class="stickyCTA">
+    <div class="stickyInner">
+      <div class="stickyBar">
+        <div class="split">
+          <b>Join the waitlist</b>
+          <span class="muted">Your 10 km, live — launching soon</span>
+        </div>
+        <button class="btn teal" onclick="document.getElementById('waitlistForm').scrollIntoView({behavior:'smooth'})">Join Now</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" style="display:none;">
+    ↑
+  </button>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container split" style="justify-content:space-between">
+      <div>
+        <div class="brand" style="margin-bottom:6px">
+          <div class="logo" aria-hidden="true"></div>
+          <b>AROUND YOU</b>
+        </div>
+        <small>© <span id="year"></span> Around You. Made in India.</small>
+      </div>
+      <div class="split">
+        <a class="muted" href="#">Privacy</a>
+        <a class="muted" href="#">Terms</a>
+        <a class="muted" href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
